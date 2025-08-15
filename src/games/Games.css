@@ -1,0 +1,419 @@
+/* --- Updated Tic-Tac-Toe Styles for Responsiveness --- */
+.game {
+  display: flex;
+  flex-direction: column; /* Stack board and history vertically */
+  align-items: center;     /* Center them horizontally */
+  font-family: sans-serif;
+  width: 100%;
+}
+
+.game-board {
+  margin-bottom: 20px; /* Add space between board and history */
+}
+
+.game-info {
+  margin-left: 0; /* Remove side margin */
+  margin-top: 15px;
+  width: 90%;
+  max-width: 250px;
+  
+  /* --- Added for scrollability --- */
+  max-height: 130px; /* Set a fixed max height */
+  overflow-y: auto;  /* Add vertical scrollbar only when needed */
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2); /* Dark, subtle background for the scroll area */
+}
+
+.game-info ol {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.game-info li {
+  margin-bottom: 8px;
+}
+
+/* Style for the move history buttons */
+.game-info button {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  /* Use the glassmorphic style but slightly toned down */
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.game-info button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.status {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff; /* Ensure text is visible on dark background */
+}
+
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.square {
+  background: rgba(255, 255, 255, 0.1); /* Match the glass theme */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff; /* Make X's and O's white */
+  float: left;
+  font-size: 34px;
+  font-weight: bold;
+  line-height: 44px;
+  height: 44px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 44px;
+  transition: background 0.2s;
+}
+
+.square:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Rock Paper Scissors Styles */
+.rps-game {
+  text-align: center;
+}
+.rps-choices button {
+  margin: 0 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+.rps-results {
+  margin-top: 20px;
+}
+.rps-results p {
+  margin: 5px 0;
+}
+.rps-results h4 {
+    font-size: 20px;
+    color: #333;
+}
+
+/* Snake Game Styles */
+.snake-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.snake-score {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.snake-grid {
+  position: relative;
+  background-color: #c2c2c2;
+  border: 2px solid #333;
+}
+.snake-segment {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #4CAF50; /* Green */
+  border: 1px solid #fff;
+  box-sizing: border-box;
+}
+.snake-food {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #f44336; /* Red */
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.snake-game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  z-index: 10;
+}
+.snake-game-over button {
+    margin-top: 20px;
+}
+
+/* 2048 Game Styles */
+.game2048-container {
+  margin-top: 20px;
+  background-color: #bbada0;
+  padding: 15px;
+  border-radius: 6px;
+  width: 350px;
+  height: 350px;
+  box-sizing: border-box;
+}
+.game2048-board {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.game2048-row {
+  display: flex;
+  gap: 15px;
+}
+.game2048-tile {
+  width: 65px;
+  height: 65px;
+  background-color: #cdc1b4;
+  border-radius: 3px;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #776e65;
+}
+.tile-2 { background-color: #eee4da; }
+.tile-4 { background-color: #ede0c8; }
+.tile-8 { background-color: #f2b179; color: #f9f6f2; }
+.tile-16 { background-color: #f59563; color: #f9f6f2; }
+.tile-32 { background-color: #f67c5f; color: #f9f6f2; }
+.tile-64 { background-color: #f65e3b; color: #f9f6f2; }
+.tile-128 { background-color: #edcf72; color: #f9f6f2; }
+.tile-2048 { background-color: #edc22e; color: #f9f6f2; }
+
+/* --- Mahabharata Bubble Challenge Styles --- */
+.bubble-challenge-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.bubble-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+
+.bubble-game-area {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  /* Make height responsive instead of fixed */
+  height: 450px;
+  max-height: 65vh; /* Ensure it fits on various screen heights */
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden; /* This will now correctly clip the bubbles */
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    /* This ensures the text aligns to the start */
+    align-items: flex-start; 
+}
+
+.stars-container {
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+}
+
+.star {
+  color: #ffd700; /* Gold color for full star */
+  text-shadow: 0 0 5px #ffd700;
+  transition: color 0.3s ease;
+}
+
+.star.empty {
+  color: rgba(255, 255, 255, 0.2); /* Faded color for empty star */
+  text-shadow: none;
+}
+
+/* Generic overlay for start and game over screens */
+.bubble-overlay-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.bubble-overlay-screen h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.bubble-overlay-screen p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.bubble-overlay-screen button {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.bubble-reset-btn {
+    background: rgba(217, 83, 79, 0.3) !important; /* Reddish tint for reset */
+    border-color: rgba(217, 83, 79, 0.5) !important;
+}
+.bubble-reset-btn:hover {
+    background: rgba(217, 83, 79, 0.5) !important;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  padding: 5px;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  transition: transform 0.1s ease-out;
+}
+
+.bubble:hover {
+    transform: scale(1.1);
+}
+
+.bubble-good {
+  background: radial-gradient(circle, rgba(255,223,186,0.5) 0%, rgba(255,165,0,0.5) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.7); /* Golden border */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255,255,255,0.2);
+}
+
+.bubble-bad {
+  background: radial-gradient(circle, rgba(255,223,186,0.5) 0%, rgba(255,165,0,0.5) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.7); /* Golden border */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* --- Jumbled Words Game Styles --- */
+.jumbled-words-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+/* --- New Style for Score Display --- */
+.jumbled-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 15px;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+
+.answer-box, .shuffled-letters-pool {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px;
+  border-radius: 12px;
+  width: 100%;
+  min-height: 60px;
+  box-sizing: border-box;
+}
+
+.answer-box {
+  background: rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.answer-box.incorrect {
+  background-color: rgba(255, 0, 0, 0.3); /* Red flash for incorrect answer */
+}
+
+.shuffled-letters-pool {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.letter-tile {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  user-select: none;
+}
+
+.letter-tile:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.letter-tile.blank {
+  background: rgba(0, 0, 0, 0.2);
+  border-style: dashed;
+  cursor: default;
+}
+
+.letter-tile.placed {
+  background-color: #4CAF50; /* Green to show it's placed */
+}
+
+.jumbled-feedback {
+  margin-top: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.jumbled-feedback p {
+  font-size: 1.2rem;
+}
+
+.next-word-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}

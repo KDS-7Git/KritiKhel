@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Berkshire+Swash&display=swap');
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.App {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* --- New Styles for the Main Title --- */
+.main-title {
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
+  
+  /* Saffron/Gold Gradient for the text */
+  /* background: linear-gradient(45deg, #FFC107, #FF9800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; */
+  
+  /* Apply the glow animation */
+  /* animation: divine-glow 3s ease-in-out infinite alternate; */
+}
+
+.sub-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: x-large;
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+/* Keyframes for the glowing effect */
+@keyframes divine-glow {
+  from {
+    text-shadow: 0 0 5px #FFC107, 0 0 10px #FFC107, 0 0 15px #FF9800;
+  }
+  to {
+    text-shadow: 0 0 10px #FFC107, 0 0 20px #FF9800, 0 0 30px #FF5722;
+  }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 16px 0;
+    text-align: center;
+}
+
+/* --- Glassmorphism Button Styles --- */
+button {
+    padding: 12px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Text Style */
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+
+    /* Transition for hover effect */
+    transition: background 0.3s ease, border 0.3s ease;
+}
+
+/* --- Button Hover Effect --- */
+button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* --- Login Page Styles --- */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 350px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login-form input::placeholder {
+  color: #ccc;
+}
+
+.error-message {
+  color: #ff8a8a;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* --- Styles for the Game Window container --- */
+.game-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.game-window h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.game-window button {
+    margin-top: 20px;
+}
