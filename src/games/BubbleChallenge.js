@@ -49,25 +49,29 @@ const BubbleChallenge = ({ rollNumber }) => {
     const indexARef = useRef(0);
     const indexBRef = useRef(0);
 
-    // Initialize or reset shuffled lists and indices when game starts
+    // Initialize shuffled lists and indices only once, or when a true reset is needed
     useEffect(() => {
-        if (gameStarted) {
+        if (shuffledARef.current.length === 0) {
             shuffledARef.current = [...listA].sort(() => Math.random() - 0.5);
-            shuffledBRef.current = [...listB].sort(() => Math.random() - 0.5);
             indexARef.current = 0;
+        }
+        if (shuffledBRef.current.length === 0) {
+            shuffledBRef.current = [...listB].sort(() => Math.random() - 0.5);
             indexBRef.current = 0;
         }
-    }, [gameStarted]);
+    }, []); // Only run once on mount
 
     function getNextName(type) {
         if (type === 'A') {
             if (indexARef.current >= shuffledARef.current.length) {
+                // All names used, reshuffle for next round
                 shuffledARef.current = [...listA].sort(() => Math.random() - 0.5);
                 indexARef.current = 0;
             }
             return shuffledARef.current[indexARef.current++];
         } else {
             if (indexBRef.current >= shuffledBRef.current.length) {
+                // All names used, reshuffle for next round
                 shuffledBRef.current = [...listB].sort(() => Math.random() - 0.5);
                 indexBRef.current = 0;
             }
@@ -118,7 +122,7 @@ const BubbleChallenge = ({ rollNumber }) => {
                 setBubbles(prev => [...prev, {
                     id: Date.now() + Math.random(),
                     name, type, size,
-                    speed: Math.random() * 0.5 + 2.5,
+                    speed: Math.random() * 0.5 + 1.25,
                     x: Math.random() * (gameAreaRef.current.offsetWidth - size),
                     y: gameAreaRef.current.offsetHeight,
                 }]);
@@ -161,6 +165,7 @@ const BubbleChallenge = ({ rollNumber }) => {
         setLives(3);
         setIsGameOver(false);
         setGameStarted(true);
+        // Do not reshuffle here; let the getNextName logic handle it
     };
 
     const Stars = ({ count }) => (

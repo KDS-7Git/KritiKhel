@@ -11,9 +11,31 @@ const LoginPage = ({ onLoginSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !rollNumber || !phone) {
-      setError('All fields are required.');
+    // Name validation: must be a non-empty string
+    if (!name || typeof name !== 'string' || name.trim().length === 0) {
+      setError('Name is required and must be a valid string.');
       return;
+    }
+    // Phone validation: must be a string of 10 digits
+    if (!/^\d{10}$/.test(phone)) {
+      setError('Phone number must be exactly 10 digits.');
+      return;
+    }
+    // Roll number validation
+    if (!rollNumber || (rollNumber.length !== 6 && rollNumber.length !== 7)) {
+      setError('Roll number must be 6 or 7 characters.');
+      return;
+    }
+    if (rollNumber.length === 6) {
+      if (!/^[A-Za-z][0-9]{5}$/.test(rollNumber)) {
+        setError('6-character roll number: first must be a letter, next 5 digits.');
+        return;
+      }
+    } else if (rollNumber.length === 7) {
+      if (!/^[A-Za-z]{2}[0-9]{5}$/.test(rollNumber)) {
+        setError('7-character roll number: first two must be letters, next 5 digits.');
+        return;
+      }
     }
     setError('');
     setIsLoading(true);
@@ -29,7 +51,7 @@ const LoginPage = ({ onLoginSuccess }) => {
 
   return (
     <div className="login-container">
-      <h1 className="main-title">Leela Games @ IIT Mandi</h1>
+      <h1 className="main-title" >Kriti Khel @ IIT Mandi</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <input
           type="text"
@@ -52,9 +74,11 @@ const LoginPage = ({ onLoginSuccess }) => {
           onChange={(e) => setPhone(e.target.value)}
           disabled={isLoading}
         />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Registering...' : 'Enter Games'}
-        </button>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <button type="submit" disabled={isLoading} >
+            {isLoading ? 'Registering...' : 'Enter Games'}
+          </button>
+        </div>
         {error && <p className="error-message">{error}</p>}
       </form>
     </div>
