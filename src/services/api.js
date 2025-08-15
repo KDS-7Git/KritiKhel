@@ -1,7 +1,8 @@
 // filepath: d:\WebDev\Janmashtami\games-website\src\services\api.js
 import axios from 'axios';
 
-const API_URL = '/api'; // Uses the proxy we set up in package.json
+// const API_URL = '/api'; // Uses the proxy we set up in package.json
+const API_URL = process.env.REACT_APP_API_URL || 'https://kritikhel-production.up.railway.app/api';
 
 export const registerPlayer = async (playerData) => {
   try {
