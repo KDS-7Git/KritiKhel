@@ -22,6 +22,16 @@ const PlayerSchema = new mongoose.Schema({
   scores: {
     jumbledWords: { type: Number, default: 0 },
     bubbleChallenge: { type: Number, default: 0 }
+  },
+  scoreSubmissions: {
+    jumbledWords: {
+      score: { type: Number, default: 0 },
+      submittedAt: { type: Date, default: null }
+    },
+    bubbleChallenge: {
+      score: { type: Number, default: 0 },
+      submittedAt: { type: Date, default: null }
+    }
   }
 }, {
   timestamps: true // Automatically adds createdAt and updatedAt fields

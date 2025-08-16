@@ -2,3 +2,7 @@ node_modules/
 build/
 .env
 test.http
+test-api.html
+test-score-tracking.js
+SECURITY.md
+migrations

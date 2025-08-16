@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './Games.css';
-import { submitScore } from '../services/api';
+import { submitScore, startGameSession } from '../services/api';
 
 // --- Game Data ---
 const listA = ["kṛṣṇa", "govinda", "gopāla", "mādhava", "murlīdhara", "śyāmasundara",
@@ -41,6 +41,7 @@ const BubbleChallenge = ({ rollNumber }) => {
     const [gameStarted, setGameStarted] = useState(false);
     const [lives, setLives] = useState(3);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [gameToken, setGameToken] = useState(null);
     const gameAreaRef = useRef(null);
 
     // Refs for shuffled lists and indices
@@ -80,12 +81,13 @@ const BubbleChallenge = ({ rollNumber }) => {
     }
 
     // --- Scoring and High Score Logic ---
+    // Update high score only when game is over
     useEffect(() => {
-        if (score > highScore) {
+        if (isGameOver && !gameStarted && score > highScore) {
             setHighScore(score);
             localStorage.setItem('bubbleHighScore', score.toString());
         }
-    }, [score, highScore]);
+    }, [isGameOver, gameStarted, score, highScore]);
 
     const resetHighScore = () => {
         localStorage.setItem('bubbleHighScore', '0');
@@ -135,6 +137,18 @@ const BubbleChallenge = ({ rollNumber }) => {
         return () => cancelAnimationFrame(animationFrameId);
     }, [gameStarted, isGameOver]);
 
+    // Submit score only when game is completely over
+    useEffect(() => {
+        if (isGameOver && !gameStarted && gameToken) {
+            submitScore({ 
+                rollNumber, 
+                gameId: 'bubbleChallenge', 
+                score,
+                gameToken 
+            });
+        }
+    }, [isGameOver, gameStarted, score, rollNumber, gameToken]);
+
     // --- Bubble Click Handler ---
     const handleBubbleClick = (bubble) => {
         if (isGameOver) return; // Prevent clicks after game over
@@ -150,7 +164,6 @@ const BubbleChallenge = ({ rollNumber }) => {
                 if (newLives <= 0) {
                     setIsGameOver(true);
                     setGameStarted(false);
-                    submitScore({ rollNumber, gameId: 'bubbleChallenge', score });
                 }
                 return newLives;
             });
@@ -158,14 +171,24 @@ const BubbleChallenge = ({ rollNumber }) => {
         setBubbles(bs => bs.filter(b => b.id !== bubble.id));
     };
 
-    const startGame = () => {
-        setScore(0);
-        setCombo(0);
-        setBubbles([]);
-        setLives(3);
-        setIsGameOver(false);
-        setGameStarted(true);
-        // Do not reshuffle here; let the getNextName logic handle it
+    const startGame = async () => {
+        try {
+            // Get game session token first
+            const session = await startGameSession(rollNumber, 'bubbleChallenge');
+            setGameToken(session.gameToken);
+            
+            // Start the game
+            setScore(0);
+            setCombo(0);
+            setBubbles([]);
+            setLives(3);
+            setIsGameOver(false);
+            setGameStarted(true);
+            // Do not reshuffle here; let the getNextName logic handle it
+        } catch (error) {
+            console.error('Failed to start game session:', error);
+            alert('Failed to start game. Please try again.');
+        }
     };
 
     const Stars = ({ count }) => (

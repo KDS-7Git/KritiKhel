@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import './Games.css';
-import { submitScore } from '../services/api';
+import { submitScore, startGameSession } from '../services/api';
 
 const mahabharata_characters = [
 "Rāma", "Sītā", "Lava", "Kuśa", "Hanumān", "Jatāyu", "Bharata", "Sugrīva", "Vibhīṣaṇa", "Mārīca", "Aṅgada", "Tārā", "Indrajit", "Arjuna", "Bhīma", "Nakula", "Kṛṣṇa", "Karṇa", "Vidura", "Śakuni", "Ghaṭa", "Śānti", "Satyā", "Draupadī", "Ulūka", "Abhīra"
@@ -27,9 +27,24 @@ const JumbledWords = ({ rollNumber }) => {
   const [timeLeft, setTimeLeft] = useState(60);
   const [gameActive, setGameActive] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [gameToken, setGameToken] = useState(null);
+
+  const shuffledWordsRef = useRef([]);
+  const wordIndexRef = useRef(0);
+
+  useEffect(() => {
+    if (shuffledWordsRef.current.length === 0) {
+      shuffledWordsRef.current = shuffleArray([...mahabharata_characters]);
+      wordIndexRef.current = 0;
+    }
+  }, []);
 
   const setupNewRound = () => {
-    const word = mahabharata_characters[Math.floor(Math.random() * mahabharata_characters.length)];
+    if (wordIndexRef.current >= shuffledWordsRef.current.length) {
+      shuffledWordsRef.current = shuffleArray([...mahabharata_characters]);
+      wordIndexRef.current = 0;
+    }
+    const word = shuffledWordsRef.current[wordIndexRef.current++];
     setCorrectWord(word);
 
     const shuffled = shuffleArray([...word]);
@@ -50,7 +65,6 @@ const JumbledWords = ({ rollNumber }) => {
     if (timeLeft <= 0) {
       setGameActive(false);
       setIsGameOver(true);
-      submitScore({ rollNumber, gameId: 'jumbledWords', score });
       return;
     }
 
@@ -61,12 +75,34 @@ const JumbledWords = ({ rollNumber }) => {
     return () => clearInterval(timerId);
   }, [gameActive, timeLeft]);
 
-  const startGame = () => {
-    setScore(0);
-    setTimeLeft(60);
-    setIsGameOver(false);
-    setGameActive(true);
-    setupNewRound();
+  // Submit score only when game is completely over
+  useEffect(() => {
+    if (isGameOver && !gameActive && gameToken) {
+      submitScore({ 
+        rollNumber, 
+        gameId: 'jumbledWords', 
+        score,
+        gameToken 
+      });
+    }
+  }, [isGameOver, gameActive, score, rollNumber, gameToken]);
+
+  const startGame = async () => {
+    try {
+      // Get game session token first
+      const session = await startGameSession(rollNumber, 'jumbledWords');
+      setGameToken(session.gameToken);
+      
+      // Start the game
+      setScore(0);
+      setTimeLeft(60);
+      setIsGameOver(false);
+      setGameActive(true);
+      setupNewRound();
+    } catch (error) {
+      console.error('Failed to start game session:', error);
+      alert('Failed to start game. Please try again.');
+    }
   };
 
   const placedLetters = useMemo(() =>
