@@ -15,8 +15,17 @@ dotenv.config();
 const app = express();
 
 // --- Middleware ---
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+  ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim())
+  : [
+      'http://localhost:3000', 
+      'http://localhost:5000',
+      'https://kritikhel.vercel.app',
+      'https://kritikhel-production.up.railway.app'
+    ];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5000'],
+  origin: allowedOrigins,
   credentials: true
 }));
 app.use(express.json());
