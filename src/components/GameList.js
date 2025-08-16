@@ -2,7 +2,7 @@ import React from 'react';
 
 const games = [
   { id: 6, name: 'Jumbled Words Challenge' },
-  { id: 5, name: 'Mahabharata Bubble Challenge' },
+  { id: 5, name: 'Krishna Names Challenge' },
   // { id: 1, name: 'Tic Tac Toe' },
   // { id: 2, name: 'Rock Paper Scissors' },
   // { id: 3, name: 'Snake' },

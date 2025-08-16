@@ -222,7 +222,7 @@ const BubbleChallenge = ({ rollNumber }) => {
 
                 {!gameStarted && !isGameOver && (
                     <div className="bubble-overlay-screen">
-                        <h3>Mahabharata Bubble Challenge</h3>
+                        <h3>Krishna Names Challenge</h3>
                         <button onClick={startGame}>Start Game</button>
                         <button className="bubble-reset-btn" onClick={resetHighScore}>Reset High Score</button>
                     </div>

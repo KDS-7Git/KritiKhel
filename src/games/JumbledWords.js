@@ -24,7 +24,7 @@ const JumbledWords = ({ rollNumber }) => {
   const [isIncorrect, setIsIncorrect] = useState(false);
   const [score, setScore] = useState(0);
   
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(300);
   const [gameActive, setGameActive] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [gameToken, setGameToken] = useState(null);
@@ -95,7 +95,7 @@ const JumbledWords = ({ rollNumber }) => {
       
       // Start the game
       setScore(0);
-      setTimeLeft(60);
+      setTimeLeft(300);
       setIsGameOver(false);
       setGameActive(true);
       setupNewRound();
@@ -167,7 +167,7 @@ const JumbledWords = ({ rollNumber }) => {
       <div className="jumbled-words-container">
         <div className="jumbled-feedback">
           <h2>Names from Our Scriptures</h2>
-          <p>Unscramble as many names as you can in 60 seconds!</p>
+          <p>Unscramble as many names as you can in 5 minutes!</p>
           <button className="next-word-btn" onClick={startGame}>Start Game</button>
         </div>
       </div>

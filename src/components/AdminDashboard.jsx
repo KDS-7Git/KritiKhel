@@ -241,7 +241,7 @@ const AdminDashboard = ({ onLogout }) => {
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Jumbled Words</th>
-                                    <th>Bubble Challenge</th>
+                                    <th>Krishna Names Challenge</th>
                                     <th>Registration Time</th>
                                     <th>Actions</th>
                                 </tr>
@@ -353,7 +353,7 @@ const AdminDashboard = ({ onLogout }) => {
                     <h2>Game Leaderboards</h2>
                     {Object.entries(leaderboards).map(([game, data]) => (
                         <div key={game} className="game-leaderboard">
-                            <h3>{game === 'jumbledWords' ? 'Jumbled Words' : 'Bubble Challenge'}</h3>
+                            <h3>{game === 'jumbledWords' ? 'Jumbled Words' : 'Krishna Names Challenge'}</h3>
                             <div className="table-container">
                                 <table>
                                     <thead>
