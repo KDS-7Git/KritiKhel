@@ -234,6 +234,8 @@
     flex-direction: column;
     /* This ensures the text aligns to the start */
     align-items: flex-start; 
+    gap: 5px;
+    position: relative;
 }
 
 .stars-container {
@@ -335,6 +337,7 @@
 .jumbled-stats {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   font-size: 1.1rem;
   font-weight: bold;
@@ -342,6 +345,8 @@
   margin-bottom: 15px;
   padding: 0 5px;
   box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .answer-box, .shuffled-letters-pool {
@@ -416,4 +421,29 @@
   margin-top: 10px;
   padding: 10px 20px;
   font-size: 1rem;
+}
+
+/* Exit & Save Button Styles */
+.exit-save-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.exit-save-btn:hover {
+  background: linear-gradient(135deg, #ee5a52, #dc3545);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.exit-save-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

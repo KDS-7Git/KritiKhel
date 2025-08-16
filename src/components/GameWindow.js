@@ -19,13 +19,18 @@ const gameComponents = {
 function GameWindow({ game, onClose, rollNumber }) {
   // Look up the component based on the selected game's ID
   const GameComponent = gameComponents[game.id];
+  
+  // Only pass onClose to games that support Exit & Save functionality
+  const gameProps = game.id === 6 // JumbledWords
+    ? { rollNumber, onClose }
+    : { rollNumber };
 
   return (
     <div className="game-window">
       <h2>{game.name}</h2>
       
       {/* Render the selected game component if it exists */}
-      {GameComponent ? <GameComponent rollNumber={rollNumber} /> : <p>Game coming soon!</p>}
+      {GameComponent ? <GameComponent {...gameProps} /> : <p>Game coming soon!</p>}
       
       <button onClick={onClose} style={{ marginTop: '20px' }}>
         Back to Games

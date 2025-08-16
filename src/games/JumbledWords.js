@@ -17,7 +17,7 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const JumbledWords = ({ rollNumber }) => {
+const JumbledWords = ({ rollNumber, onClose }) => {
   const [correctWord, setCorrectWord] = useState('');
   const [letters, setLetters] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -105,6 +105,35 @@ const JumbledWords = ({ rollNumber }) => {
     }
   };
 
+  const exitAndSave = async () => {
+    if (gameToken && score > 0) {
+      try {
+        await submitScore({ 
+          rollNumber, 
+          gameId: 'jumbledWords', 
+          score,
+          gameToken 
+        });
+        alert(`Game saved! Final score: ${score}`);
+      } catch (error) {
+        console.error('Failed to save score:', error);
+        alert('Failed to save score, but returning to games.');
+      }
+    }
+    
+    // Reset game state
+    setGameActive(false);
+    setIsGameOver(true);
+    setTimeLeft(300);
+    setScore(0);
+    setGameToken(null);
+    
+    // Return to games list
+    if (onClose) {
+      onClose();
+    }
+  };
+
   const placedLetters = useMemo(() =>
     letters
       .filter(l => l.isPlaced)
@@ -179,6 +208,7 @@ const JumbledWords = ({ rollNumber }) => {
       <div className="jumbled-stats">
         <span>Score: {score}</span>
         <span>Time: {timeLeft}s</span>
+        <button className="exit-save-btn" onClick={exitAndSave}>Exit & Save</button>
       </div>
 
       <div className={`answer-box ${isIncorrect ? 'incorrect' : ''}`}>
